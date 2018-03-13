@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 
-    int t1hours, t1mins, t1day, t2hours, t2mins, t2day;
+    int t1hours, t1mins, t1day, t1secs, t2hours, t2mins, t2day, t2secs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 t1hours  = start.get(Calendar.HOUR_OF_DAY);
                 t1mins = start.get(Calendar.MINUTE);
                 t1day = start.get(Calendar.DAY_OF_WEEK);
+                t1secs = start.get(Calendar.SECOND);
             }
         });
 
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 t2hours = stop.get(Calendar.HOUR_OF_DAY);
                 t2mins = stop.get(Calendar.MINUTE);
                 t2day = stop.get(Calendar.DAY_OF_WEEK);
+                t2secs = stop.get(Calendar.SECOND);
             }
         });
 
@@ -61,18 +63,23 @@ public class MainActivity extends AppCompatActivity {
         btndiff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int hours, minutes;
+                int hours, minutes, seconds;
 
                 // same day
                 if(t2day-t1day==0) {
                     hours = t2hours - t1hours;
                     minutes = t2mins - t1mins;
+                    seconds = t2secs - t1secs;
                     if (minutes < 0) {
                         minutes += 60;
                         hours -= 1;
 
                     }
-                    timediff.setText("Duration: " + hours + " hrs " + minutes + " mins" );
+                    if (seconds<0) {
+                        seconds += 60;
+                        minutes -= 1;
+                    }
+                    timediff.setText("Duration: " + hours + " hrs " + minutes + " mins " + seconds + " sec" );
                 }
                     // different days
                     else {
@@ -80,12 +87,17 @@ public class MainActivity extends AppCompatActivity {
                     int n = ((t2day-t1day) + 7)%7;
                     hours = ((t2hours - t1hours) + 24)%24;
                     minutes = t2mins - t1mins;
+                    seconds = t2secs - t1secs;
                     if(minutes<0) {
                         minutes += 60;
                         hours -=1;
                     }
+                    if(seconds<0) {
+                        seconds += 60;
+                        minutes -= 1;
+                    }
                     hours += (n-1)*24;
-                    timediff.setText("Duration: " + hours + " hrs " + minutes + " mins" );
+                    timediff.setText("Duration: " + hours + " hrs " + minutes + " mins " + seconds + " sec" );
                     }
                 }
         });
