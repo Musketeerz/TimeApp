@@ -14,16 +14,21 @@ public class MainActivity extends AppCompatActivity {
 
     Button btn1, btn2, btndiff;
     TextView time1, time2, timediff;
+
+    // Objects for calendar and date format
     Calendar cal = Calendar.getInstance();
     SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
+
     int t1hours, t1mins, t1day, t2hours, t2mins, t2day;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Time 1
         time1 = findViewById(R.id.time1txt);
-        btn1 = (Button)findViewById(R.id.btn1);
+        btn1 = findViewById(R.id.btn1);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -34,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Time 2
         time2 = findViewById(R.id.time2txt);
         btn2 = findViewById(R.id.btn2);
         btn2.setOnClickListener(new View.OnClickListener() {
@@ -46,12 +52,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        timediff = (TextView)findViewById(R.id.timedifftxt);
+        // Time difference
+        timediff = findViewById(R.id.timedifftxt);
         btndiff = findViewById(R.id.btndiff);
         btndiff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int hours, minutes;
+
+                // same day
                 if(t2day-t1day==0) {
                     hours = t2hours - t1hours;
                     minutes = t2mins - t1mins;
@@ -60,16 +69,24 @@ public class MainActivity extends AppCompatActivity {
                         hours -= 1;
 
                     }
-                    //timediff.setText(Duration: + hours + "");
+                    timediff.setText("Duration: " + hours + " hrs " + minutes + " mins" );
                 }
-
+                    // different days
                     else {
-
+                      // t2day-t1day not equals 0
+                    int n = ((t2day-t1day) + 7)%7;
+                    hours = ((t2hours - t1hours) + 24)%24;
+                    minutes = t2mins - t1mins;
+                    if(minutes<0) {
+                        minutes += 60;
+                        hours -=1;
+                    }
+                    hours += (n-1)*24;
+                    timediff.setText("Duration: " + hours + " hrs " + minutes + " mins" );
                     }
                 }
         });
 
-        //int get (TemporalField field)
 
 
     }
