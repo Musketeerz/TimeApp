@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Objects for calendar and date format
     Calendar cal = Calendar.getInstance();
-    SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
+    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 
     int t1hours, t1mins, t1day, t2hours, t2mins, t2day;
 
