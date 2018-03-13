@@ -16,7 +16,8 @@ public class MainActivity extends AppCompatActivity {
     TextView time1, time2, timediff;
 
     // Objects for calendar and date format
-    Calendar cal = Calendar.getInstance();
+
+
     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 
     int t1hours, t1mins, t1day, t2hours, t2mins, t2day;
@@ -32,10 +33,11 @@ public class MainActivity extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                time1.setText( cal.getDisplayName(Calendar.DAY_OF_WEEK,Calendar.SHORT, Locale.getDefault())+ ", " + sdf.format(cal.getTime()));
-                t1hours  = cal.get(Calendar.HOUR_OF_DAY);
-                t1mins = cal.get(Calendar.MINUTE);
-                t1day = cal.get(Calendar.DAY_OF_WEEK);
+                Calendar start = Calendar.getInstance();
+                time1.setText( start.getDisplayName(Calendar.DAY_OF_WEEK,Calendar.SHORT, Locale.getDefault())+ ", " + sdf.format(start.getTime()));
+                t1hours  = start.get(Calendar.HOUR_OF_DAY);
+                t1mins = start.get(Calendar.MINUTE);
+                t1day = start.get(Calendar.DAY_OF_WEEK);
             }
         });
 
@@ -45,10 +47,11 @@ public class MainActivity extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                time2.setText( cal.getDisplayName(Calendar.DAY_OF_WEEK,Calendar.SHORT, Locale.getDefault()) + ", " + sdf.format(cal.getTime()));
-                t2hours = cal.get(Calendar.HOUR_OF_DAY);
-                t2mins = cal.get(Calendar.MINUTE);
-                t2day = cal.get(Calendar.DAY_OF_WEEK);
+                Calendar stop = Calendar.getInstance();
+                time2.setText( stop.getDisplayName(Calendar.DAY_OF_WEEK,Calendar.SHORT, Locale.getDefault()) + ", " + sdf.format(stop.getTime()));
+                t2hours = stop.get(Calendar.HOUR_OF_DAY);
+                t2mins = stop.get(Calendar.MINUTE);
+                t2day = stop.get(Calendar.DAY_OF_WEEK);
             }
         });
 
