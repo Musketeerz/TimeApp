@@ -1,5 +1,7 @@
 package com.shwethavasudevan.timeapp;
 
+import android.os.CountDownTimer;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +14,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btn1, btn2, btndiff;
+    Button btn1, btn2, btndiff, alertBtn;
     TextView time1, time2, timediff;
 
     // Objects for calendar and date format
@@ -100,9 +102,36 @@ public class MainActivity extends AppCompatActivity {
                     timediff.setText("Duration: " + hours + " hrs " + minutes + " mins " + seconds + " sec" );
                     }
                 }
+
         });
 
+        alertBtn = findViewById(R.id.albtn);
 
+        alertBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                AlertDialog.Builder ab = new AlertDialog.Builder(view.getContext());
+                ab.setMessage("Alert closes in... \n00:20");
+
+                final AlertDialog alert = ab.create();
+                alert.show();
+                new CountDownTimer(20000,1000)
+                {
+                    @Override
+                    public void onTick(long l) {
+                        alert.setMessage("Alert closes in... \n" + "00:"+l/1000);
+
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        alert.dismiss();
+                    }
+                }.start();
+
+            }
+        });
 
     }
 }
